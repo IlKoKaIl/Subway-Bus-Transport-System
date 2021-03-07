@@ -1,0 +1,262 @@
+=====
+ADD INSTRUCTIONS FOR HOW TO RUN/USE YOUR PROGRAM HERE:
+e.g. What format should we use to input data or add data to events.txt? Anything else we need to know in order to use your program?
+=====
+
+How to Run Code:
+
+To run the code, run Main.java and Main.java will run the file ‘events.txt’ and separate each line of the file as an individual input run into Main.java.
+
+To have a customizable input, appropriately edit the events.txt file or make a new events.txt file such that each line is an appropriate input. The appropriate format of all possible inputs are listed below:
+
+Formats for each type of input:
+
+Our format of possible inputs are:
+
+admin inputs:
+‘admin newcardholder firstname lastname email’ (Create new cardholder)
+‘admin viewcardholders’ (View current cardholders)
+‘admin nextday’ (Move to the next day)
+‘admin showdailyreport’ (Print a report that displays revenue made from trips today)
+
+Travelcard inputs: (where cardholderID is the unique id created when making a new cardholder)
+‘cardholderID remove cardID’ (removing an existing travelcard with id cardID with cardholderID)
+‘cardholderID addcard cardID’ (create a travelcard with admin cardholderID)
+‘cardholderID addbalance cardID’ (add balance to card with id cardID)
+‘cardholderID suspend cardID’ (Change status of card with id cardID to inactive)
+‘cardholderID reactivate cardID’ (Change status of card with id cardID to active)
+‘cardholderID changename newfirstname newlastname’ (Change first/last name to newfirst/last name)
+‘cardholderID viewcards’ (view all created cards for this cardholder)
+‘cardholderID viewtrips’ (view last 3 trips for this cardholder)
+‘cardholderID track’ (view total fees collected from every travelcard this cardholder has created)
+‘cardholderID enter cardID location station/stop’ (which ‘location’ a ‘cardID’ enters and if it is a ‘station’ or ‘stop’)
+‘cardholderID exit cardID location station/stop’ (which ‘location’ a ‘cardID’ exits and if it is a ‘station’ or ‘stop’)
+
+
+
+
+
+
+
+
+Description of code architecture:
+
+We have 5 classes.
+Main.java :
+Instantiates an instance of the singleton TransitStaff and runs methods from the other 4 classes to allow for the features of the program to operate by reading inputs line by line from the file “events.txt”
+
+CardHolder.java:
+Has an ArrayList of Trip from Trip.java and an ArrayList of TravelCard from TravelCard.java and various methods to modify these arraylists alongside methods to modify itself.
+
+TransitStaff.java:
+Is implemented as a Singleton. Stores admin properties such as the list of all Trips made with the system and the list of all registered CardHolders within the system.
+
+TravelCard.java:
+Contains methods to implement a travelcard as described in the features. Allows for a card to be created, activated, deactivated, have its balance topped up, and balance deducted when paying for trips.
+
+Trip.java:
+Has the method to initialize a trip that’s currently empty with no start/end locations. Has the settings methods to set start/end/fee and trip type for a trip.
+
+
+
+
+
+
+
+
+
+
+=====
+LIST ALL FEATURES THAT YOU WORKED ON HERE, AND HOW TO INPUT RELEVANT DATA FOR THE FEATURE (IF APPLICABLE)
+=====
+FEATURE 1
+
+Description: Tapping a card at a station
+ 
+Usage Instructions:  Done using the trip.java class and pay method. When tapped at a station a trip start location and time is created and recorded.  Will print a message informing the user which station they tapped on.
+Data entry done following way ‘cardholderID enter cardID location station’ (which ‘location’ a ‘cardID’ enters and if it is a ‘station’ or ‘stop’)
+
+
+Design Decisions: For tapping onto station a fee is not deducted but instead a trip with start location is made and recorded with time.
+
+
+FEATURE 2
+
+Description: Tapping card onto a bus
+
+Usage Instructions: Done through main.java. Call ‘cardholderID enter cardID location stop’ (which ‘location’ a ‘cardID’ enters and if it is a ‘station’ or ‘stop’). When done successfully prints a message saying so and at which stop entry was done.
+
+
+Design Decisions: When tapping onto a bus a fee is deducted and a trip with that start location is created.
+This is done in TravelCard.java and Trip.java respectively and is run through main.java. 
+
+
+FEATURE 3
+
+Description: Tapping off a bus
+
+Usage Instructions: When a user exits a bus a message is printed telling them they tapped off and where it was done.
+Entry done using following ‘cardholderID exit cardID location stop’ (which ‘location’ a ‘cardID’ enters and if it is a ‘station’ or ‘stop’)
+
+
+Design Decisions: When a user taps off a bus a trip is completed and recorded
+
+
+
+
+FEATURE 4
+
+Description: Tapping off a station
+
+Usage Instructions: When a user exits a station a message is printed telling them so along with the fee charged.
+Done using following call ‘cardholderID exit cardID location station’ (which ‘location’ a ‘cardID’ enters and if it is a ‘station’ or ‘stop’)
+
+
+Design Decisions: A fee is charged when tapping off a station. A trip is completed and recorded saving the fee and start/end location of the trip. 
+
+
+FEATURE 5
+
+Description: Adding funds to a TravelCard
+
+Usage Instructions: A cards balance can be added to in increments of 10,20 or 50 dollars using the addBalance method. When a balance is added successfully or fails a message is printed to confirm the outcome.
+After creating a cardholder call following
+‘cardholderID addbalance cardID amount” where amount is either 10,20,50
+
+Design Decisions: As said balance is added in increments of 10,20 or 50 dollars. Done in the TravelCard class using a method. Done by OOP.
+
+
+
+
+FEATURE 6 
+
+Description: TransitStaff can access the last 3 trips made on a TravelCard
+
+Usage Instructions: After creating a cardholder in main.java as described in feature 11. Then creating a new travelcard as in feature 7. After that card makes trips the last 3 trips can be viewed using the calls
+ ‘CardholderID viewtrips’ Returns an arraylist of the last 3 trips made.
+
+Design Decisions: TransitStaff is implemented as a singleton. 
+
+
+
+FEATURE 7
+
+Description:Allows a CardHolder to create a new Travel card/ Remove a Travel card
+
+Usage Instructions: In the TravelCard class can create a new card with a given ID using the addCard method. If the card is made successfully a message is printed informing the user. Similarly a card with given id can be removed and when done successfully it prints a message informing the user. Done using Main.java class. After creating a new cardholder( feature 11) can a travelcard using command ‘cardholderID addcard’
+Where cardholderID is the id of a cardholder
+
+Design Decisions:  When a travelcard is made its status is set to active, it is assigned the given id and has a balance of $19
+The output message will read ‘New TravelCard cardID has been created for CardHolderID’ where cardID is the unique card id related to the TravelCard.
+The card will be assigned a unique cardID that is case sensitive.
+
+
+
+
+
+FEATURE 8
+
+Description: Changing name of a existing CardHolder
+
+Usage Instructions: Allows a travel cardholder to change their name. If done successfully prints out a message informing the user. Done in main.java. After creating a new cardholder (feature 11)
+ ‘admin newcardholder john john@gmail.com’ can change their name using the command 
+‘cardholderID changename firstname,lastname’
+
+Design Decisions: Made using OOP, the CardHolder class has the method allowing for a name to be changed
+
+
+
+FEATURE 9
+
+Description:Allows a CardHolder(Admin) to  Activate/Deactivate an existing travel card
+
+Usage Instructions: In the CardHolder class use the methods suspendCard, activateCard to deactivate/activate an existing travelcard. Does this using main.java . After running main.java and adding a card for an admin can call ‘CardHolderID cardID activate/suspend’  in console. If done successfully a output message informing the user is printed
+
+Design Decisions: OOP design, the CardHolder class has the method allowing for this feature.
+
+
+
+
+
+
+FEATURE 10
+
+Description: Allows a CardHolder to view their own cards
+
+Usage Instructions: after creating a cardholder and adding TravelCards using that cardholder the admin can view their created TravelCards in the following way
+‘CardholderID viewcards’ where CardholderID is the id (Done in main.java console)
+Outputs an arraylist of travelcards
+
+Design Decisions: Returns an arraylisit of TravelCards displaying their activation status, ID and balance
+
+
+
+FEATURE  11
+
+Description: Allows creation of new CardHolders, each with their own unique CardHolderID
+
+Usage Instructions: When creating a new CardHolder with an input in the format of “admin newcardholder firstname lastname email”, the system will create a new CardHolder class that stores the CardHolder’s full name, email address, and a unique ID generated to the CardHolder. Will output a message informing of the creation of a new cardholder along with their id.
+
+Design Decisions: A unique cardholderID is generated for each cardholder in the format of “firstname[0]+lastname[0]+String(integer)” where the integer assigned is the number of unique entries of IDs that start with “firstname[0]+lastname[0]” in the system at the moment of creating the new cardholder.
+
+
+
+
+
+FEATURE  12
+
+Description: Stations and Bus routes are hard coded in Main.java
+
+Usage Instructions: Stations are stored in an arraylist called stations in Main.java and bus routes are stored in an arraylist called busRoutes where each element of a busRoutes is a busroute in the form of an arraylist
+
+Design Decisions: bus routes are stored in the following form  ArrayList<ArrayList<Pair<String, Integer>>>()
+Train routes are stored in the following form   ArrayList<Pair<String, Integer>>();
+
+
+
+
+
+FEATURE  13
+
+Description: Moving onto the next day
+
+Usage Instructions: To move onto the next day of trips the admin calls ‘admin nextday’ (Move to the next day)
+
+
+Design Decisions: Revenue is calculated daily so moving onto the next day means any new trips made from that point have their total revenue calculated once again.
+
+
+
+FEATURE  14
+
+Description: Track total fees earned by a cardholder from the travel cards they created.
+
+Usage Instructions: In main.java run ‘cardholderID track’ as described in inputs at the top.
+
+Design Decisions: Each time a fee is paid by a travelcard (when tapping onto a bus/ tapping off a station). The cardholder that created the card has a fee updated. Done in the TransitStaff.java class.
+
+
+FEATURE 15
+
+Description: Prevents people from entering busses/stations if their card balance is <=0
+
+Usage Instructions: In main.java the enter case( as described above in features 1,2) If there are insufficient funds a message highlighting this is printed
+
+Design Decisions: Allow TravelCard balance to fall below 0
+
+
+
+======
+
+Note: If you have design decisions that don't fit under a specific feature, but are instead relevant to multiple features, feel free to include them at the bottom of this file here.
+
+OTHER NOTES
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+admin newcardholder Arthur Soenarto arthur@gmail.com
+admin newcardholder Mingon Song mg@bing.com
+admin newcardholder Mihir Koka mk@yahoo.com
+admin newcardholder Carmello Restivo carmello@outlook.com
+admin newcardholder Usah Tester user@utoronto.ca
+admin newcardholder Mariel Song mariel@gmail.com
+admin viewcardholders
+UT1 changename User Tester
+admin viewcardholders
+AS1 addcard
+AS1 addbalance CARD1 40
+AS1 addbalance CARD1 50
+AS1 viewcards
+AS1 addcard
+AS1 remove CARD2
+MS2 addcard
+MS1 addcard
+MK1 addcard
+CR1 addcard
+AS1 enter CARD1 Chinatown stop
+AS1 exit CARD1 Museum stop
+AS1 viewcards
+AS1 viewtrips
+AS1 enter CARD1 Museum station
+AS1 exit CARD1 King station
+AS1 viewcards
+AS1 enter CARD1 King stop
+AS1 exit CARD1 OldTown stop
+AS1 viewtrips
+MS1 enter CARD1 Queen'sPark station
+MS1 exit CARD1 King station
+MS1 viewtrips
+MS1 viewcards
+MS1 enter CARD1 Chinatown stop
+MS1 exit CARD1 StPatrick stop
+MS1 viewtrips
+MS1 viewcards
+MS1 enter CARD1 StPatrick stop
+MS1 exit CARD1 Harbourfront stop
+MS1 viewtrips
+MS1 viewcards
+MS1 track
+admin showdailyreport
+admin nextday
